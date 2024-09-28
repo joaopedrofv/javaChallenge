@@ -69,6 +69,27 @@ public class CadastroController {
         return new ResponseEntity<>(cadastroResponseDTO, HttpStatus.OK);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<CadastroResponseDTO> update(@PathVariable Long id, @Valid @RequestBody
+    CadastroRequestDTO cadastroRequestDTO) {
+        Optional<Cadastro> cadastroSalvo = cadastroRepository.findById(id);
+        if (cadastroSalvo.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        Cadastro cadastro = cadastroMapper.requestRecordToCadastro(cadastroRequestDTO);
+        cadastro.setId(id);
+        Cadastro cadastroAtualizo = cadastroRepository.save(cadastro);
 
+        CadastroResponseDTO cadastroResponseDTO = cadastroMapper.cadastroResponseDTO(cadastroAtualizo);
+        return new ResponseEntity<>(cadastroResponseDTO, HttpStatus.OK);
+    }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        Optional<Cadastro> cadastroSalvo = cadastroRepository.findById(id);
+        if (cadastroSalvo.isEmpty()) {
+            return new ResponseEntity<>
+                    (HttpStatus.BAD_REQUEST);    }    cadastroRepository.delete(cadastroSalvo.get());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
