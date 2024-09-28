@@ -9,12 +9,20 @@ import com.example.demo.service.CadastroMapper;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 // localhost:8080/cadastros
@@ -26,6 +34,9 @@ public class CadastroController {
     @Autowired
     private CadastroMapper cadastroMapper;
 
+    Pageable paginacao = PageRequest.of(0, 2, Sort.by("titulo").descending());
+
+
     @PostMapping
     public ResponseEntity<CadastroResponseDTO> createCadastro(@Valid @RequestBody CadastroRequestDTO cadastroRequest) {
         Cadastro cadastroConvertido = cadastroMapper.requestRecordToCadastro(cadastroRequest);
@@ -33,4 +44,31 @@ public class CadastroController {
         CadastroResponseDTO cadastroResponse = cadastroMapper.cadastroResponseDTO(cadastroCriado);
         return new ResponseEntity<>(cadastroResponse, HttpStatus.CREATED);
     }
+
+    @GetMapping
+    public ResponseEntity<List<CadastroResponseDTO>> readLivros() {
+        Page<Cadastro> listaCadastros = cadastroRepository.findAll(paginacao);
+        if (listaCadastros.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        List<CadastroResponseDTO> listaCadastrosResponse = new ArrayList<>();
+        for (Cadastro cadastro : listaCadastros) {
+            CadastroResponseDTO cadastroResponseDTO = cadastroMapper.cadastroResponseDTO(cadastro);
+            listaCadastrosResponse.add(cadastroResponseDTO);
+        }
+        return new ResponseEntity<>(listaCadastrosResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+        public ResponseEntity<CadastroResponseDTO> readCadastro(@PathVariable Long id) {
+        Optional<Cadastro> cadastroSalvo = cadastroRepository.findById(id);
+        if (cadastroSalvo.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        CadastroResponseDTO cadastroResponseDTO = cadastroMapper.cadastroResponseDTO(cadastroSalvo.get());
+        return new ResponseEntity<>(cadastroResponseDTO, HttpStatus.OK);
+    }
+
+
+
 }
