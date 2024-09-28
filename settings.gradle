@@ -1,0 +1,11 @@
+<<<<<<< HEAD
+=======
+pluginManagement {
+	repositories {
+		maven { url 'https://repo.spring.io/milestone' }
+		maven { url 'https://repo.spring.io/snapshot' }
+		gradlePluginPortal()
+	}
+}
+>>>>>>> 196f0f3 (Criação do projeto SpringBoot, diretórios, classes e repositórios)
+rootProject.name = 'demo'
