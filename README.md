@@ -10,7 +10,7 @@ Criação dos métodos PUT e DELETE e auxílio com a ideia principal do Challeng
 
 ## Link do Vídeo da Proposta Tecnológica
 
-[Insira o link do vídeo aqui]
+[[Link do vídeo.](https://www.youtube.com/watch?v=yUlYOG-bqCk&ab_channel=Jo%C3%A3oPedro)]
 
 ## Objetivo
 
@@ -23,3 +23,38 @@ Quem seria esse possível usuário? Qualquer um que necessite de tratamento dent
 ## Descrição do Sistema
 
 O sistema Java consiste em uma API para administração de cadastros. Através dela, todo cadastro realizado na plataforma seria mantido no banco de dados Oracle, além de possibilitar realizar o CRUD com os mesmos dados.
+
+## Instruções para Rodar a Aplicação
+
+O usuário apenas deve rodar a classe `JavaChallengeApplication`, visto que o banco de dados Oracle ja está criado e com as tabelas configuradas, e o usuário e senha é automaticamente passado na `application.properties`, não necessitando que o programa seja rodado com parâmetros.
+
+## Endpoints da API
+
+### 1. **Criar Cadastro** - `POST /cadastros`
+   - Descrição: Cria um novo cadastro no sistema.
+   - Corpo da Requisição:
+     ```json
+     {
+       "id": 1,
+       "nome": "João",
+       "sobrenome": "Pedro",
+       "email": "joao.pedro@gmail.com",
+       "senha": "senhaSegura",
+       "dataNascimento": "1995-05-20",
+       "sexo": "M",
+       "tipoPlano": "Premium",
+       "cep": "08730300"
+     }
+     ```
+
+### 2. **Listar Cadastros** - `GET /cadastros`
+   - Descrição: Retorna uma lista de cadastros.
+
+### 3. **Consultar Cadastro por ID** - `GET /cadastros/{id}`
+   - Descrição: Retorna um cadastro específico.
+
+### 4. **Atualizar Cadastro** - `PUT /cadastros/{id}`
+   - Descrição: Atualiza os dados de um cadastro.
+
+### 5. **Deletar Cadastro** - `DELETE /cadastros/{id}`
+   - Descrição: Deleta um cadastro do sistema.
