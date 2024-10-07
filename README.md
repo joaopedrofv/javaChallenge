@@ -10,7 +10,7 @@ Criação dos métodos PUT e DELETE e auxílio com a ideia principal do Challeng
 
 ## Link do Vídeo da Proposta Tecnológica
 
-[[Link do vídeo.](https://www.youtube.com/watch?v=yUlYOG-bqCk&ab_channel=Jo%C3%A3oPedro)]
+[Link do vídeo.](https://www.youtube.com/watch?v=yUlYOG-bqCk&ab_channel=Jo%C3%A3oPedro)
 
 ## Objetivo
 
@@ -27,6 +27,8 @@ O sistema Java consiste em uma API para administração de cadastros. Através d
 ## Instruções para Rodar a Aplicação
 
 O usuário apenas deve rodar a classe `JavaChallengeApplication`, visto que o banco de dados Oracle ja está criado e com as tabelas configuradas, e o usuário e senha é automaticamente passado na `application.properties`, não necessitando que o programa seja rodado com parâmetros.
+
+[Vídeo explicativo.](https://www.youtube.com/watch?v=MIxtdDENVyA&ab_channel=Jo%C3%A3oPedro)
 
 ## Endpoints da API
 
