@@ -8,6 +8,10 @@ Idealização do projeto Java, criação de grande parte do código fonte.
 **Vinicius Malavia Lorenzetti | RM 553121**  
 Criação dos métodos PUT e DELETE e auxílio com a ideia principal do Challenge.
 
+## Período de Desenvolvimento
+
+Aplicação desenvolvida entre **02/09/2024** e **07/10/2024**.
+
 ## Link do Vídeo da Proposta Tecnológica
 
 [Link do vídeo.](https://www.youtube.com/watch?v=yUlYOG-bqCk&ab_channel=Jo%C3%A3oPedro)
