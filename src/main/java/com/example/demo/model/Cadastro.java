@@ -3,13 +3,12 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 @Table(name = "CADASTRO")
 public class Cadastro {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(name = "nome")
     private String nome;
@@ -26,12 +25,12 @@ public class Cadastro {
     @Column(name = "tipo_plano")
     private String tipoPlano;
     @Column(name = "cep")
-    private int cep;
+    private String cep;
 
     public Cadastro() {
     }
 
-    public Cadastro(long id, String nome, String sobrenome, String email, String senha, Date dataNascimento, String sexo, String tipoPlano, int cep) {
+    public Cadastro(long id, String nome, String sobrenome, String email, String senha, Date dataNascimento, String sexo, String tipoPlano, String cep) {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -107,11 +106,11 @@ public class Cadastro {
         this.tipoPlano = tipoPlano;
     }
 
-    public int getCep() {
+    public String getCep() {
         return cep;
     }
 
-    public void setCep(int cep) {
+    public void setCep(String cep) {
         this.cep = cep;
     }
 }

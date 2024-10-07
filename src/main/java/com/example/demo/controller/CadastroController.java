@@ -26,7 +26,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 // localhost:8080/cadastros
-@RequestMapping(value = "/livros", produces = {"application/json"})
+@RequestMapping(value = "/cadastros", produces = {"application/json"})
 @Tag(name = "api-cadastros")
 public class CadastroController {
     @Autowired
@@ -34,19 +34,24 @@ public class CadastroController {
     @Autowired
     private CadastroMapper cadastroMapper;
 
-    Pageable paginacao = PageRequest.of(0, 2, Sort.by("titulo").descending());
+    Pageable paginacao = PageRequest.of(0, 2, Sort.by("nome").descending());
 
 
     @PostMapping
     public ResponseEntity<CadastroResponseDTO> createCadastro(@Valid @RequestBody CadastroRequestDTO cadastroRequest) {
+        if (cadastroRepository.existsById(cadastroRequest.id())) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
         Cadastro cadastroConvertido = cadastroMapper.requestRecordToCadastro(cadastroRequest);
         Cadastro cadastroCriado = cadastroRepository.save(cadastroConvertido);
         CadastroResponseDTO cadastroResponse = cadastroMapper.cadastroResponseDTO(cadastroCriado);
         return new ResponseEntity<>(cadastroResponse, HttpStatus.CREATED);
     }
 
+
     @GetMapping
-    public ResponseEntity<List<CadastroResponseDTO>> readLivros() {
+    public ResponseEntity<List<CadastroResponseDTO>> readCadastros() {
         Page<Cadastro> listaCadastros = cadastroRepository.findAll(paginacao);
         if (listaCadastros.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

@@ -1,11 +1,14 @@
 package com.example.demo.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-import java.util.Date;
+import java.sql.Date;
 
 public record CadastroRequestDTO(
+        Long id,
         @NotBlank(message = "O nome da pessoa é obrigatório")
         String nome,
         @NotBlank(message = "O sobrenome da pessoa é obrigatório")
@@ -14,14 +17,14 @@ public record CadastroRequestDTO(
         String email,
         @NotBlank(message = "A senha da pessoa é obrigatória")
         String senha,
-        @NotBlank(message = "A data de nascimento é obrigatória")
+        @NotNull(message = "A data de nascimento é obrigatória")
         Date dataNascimento,
         @NotBlank(message = "O sexo da pessoa é obrigatório")
         String sexo,
         @NotBlank(message = "O tipo de plano da pessoa é obrigatório")
         String tipoPlano,
         @NotBlank(message = "O CEP é obrigatório")
-        @Size(min = 8, max = 8, message = "O CEP deve ter exatamente 8 número")
-        int cep
+        @Pattern(regexp = "\\d{5}-\\d{3}", message = "O CEP deve estar no formato 00000-000.")
+        String cep
 ) {
 }

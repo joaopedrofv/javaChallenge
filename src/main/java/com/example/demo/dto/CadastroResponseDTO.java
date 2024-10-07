@@ -2,7 +2,7 @@ package com.example.demo.dto;
 
 import io.swagger.v3.oas.annotations.links.Link;
 
-import java.util.Date;
+import java.sql.Date;
 
 public record CadastroResponseDTO(
         Long id,
@@ -13,6 +13,6 @@ public record CadastroResponseDTO(
         Date dataNascimento,
         String sexo,
         String tipoPlano,
-        int cep
+        String cep
 ) {
 }

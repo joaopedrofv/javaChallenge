@@ -4,12 +4,15 @@ import com.example.demo.dto.CadastroRequestDTO;
 import com.example.demo.dto.CadastroResponseDTO;
 import com.example.demo.model.Cadastro;
 import org.springframework.hateoas.Link;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CadastroMapper {
 
-    // livroRequestDTO (Record) para Livro
+    // livroRequestDTO (Record) para Cadastro
     public Cadastro requestRecordToCadastro(CadastroRequestDTO cadastroRequestDTO) {
         Cadastro cadastro = new Cadastro();
+        cadastro.setId(cadastroRequestDTO.id());
         cadastro.setNome(cadastroRequestDTO.nome());
         cadastro.setSobrenome(cadastroRequestDTO.sobrenome());
         cadastro.setEmail(cadastroRequestDTO.email());
@@ -21,7 +24,7 @@ public class CadastroMapper {
         return cadastro;
     }
 
-    // livro para livroResponseDTO (Record)
+    // cadastro para cadastroResponseDTO (Record)
     public CadastroResponseDTO cadastroResponseDTO(Cadastro cadastro) {
         return new CadastroResponseDTO(
                 cadastro.getId(),
