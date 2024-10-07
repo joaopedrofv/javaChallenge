@@ -43,7 +43,7 @@ O usuário apenas deve rodar a classe `JavaChallengeApplication`, visto que o ba
        "dataNascimento": "1995-05-20",
        "sexo": "M",
        "tipoPlano": "Premium",
-       "cep": "08730300"
+       "cep": "08730-300"
      }
      ```
 
