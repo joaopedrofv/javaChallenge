@@ -35,7 +35,19 @@ O usuário apenas deve rodar a classe `JavaChallengeApplication`, visto que o ba
 [Vídeo explicativo.](https://www.youtube.com/watch?v=MIxtdDENVyA&ab_channel=Jo%C3%A3oPedro)
 
 ## Endpoints da API
+### Parâmetros da API
 
+| Parâmetro | Tipo | Descrição |
+|-----------|------|:-----------:|
+|`id`       |`int` | Id do cadastro no banco de dados Oracle.|
+|`nome`     |`String`| Nome do usuário.|
+|`sobrenome`|`String`| Sobrenome do usuário.|
+|`email`    |`String`| Email do usuário.|
+|`senha`    |`String`| Senha do usuário.|
+|`dataNascimento`|`Date`| Data de nascimento do usuário (*yyyy-mm-dd*).|
+|`sexo`     |`String`| Sexo do usuário.|
+|`tipoPlano`|`String`| Tipo de plano da Odontoprev do usuário.|
+|`cep`      |`String`| CEP do usuário.|
 ### 1. **Criar Cadastro** - `POST /cadastros`
    - Descrição: Cria um novo cadastro no sistema.
    - Corpo da Requisição:
@@ -52,7 +64,7 @@ O usuário apenas deve rodar a classe `JavaChallengeApplication`, visto que o ba
        "cep": "08730-300"
      }
      ```
-
+     
 ### 2. **Listar Cadastros** - `GET /cadastros`
    - Descrição: Retorna uma lista de cadastros.
 
