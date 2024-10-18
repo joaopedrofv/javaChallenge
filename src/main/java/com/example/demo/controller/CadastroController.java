@@ -18,6 +18,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -56,7 +57,7 @@ public class CadastroController {
 
         Cadastro cadastroConvertido = cadastroMapper.requestRecordToCadastro(cadastroRequest);
         Cadastro cadastroCriado = cadastroRepository.save(cadastroConvertido);
-        CadastroResponseDTO cadastroResponse = cadastroMapper.cadastroResponseDTO(cadastroCriado);
+        CadastroResponseDTO cadastroResponse = cadastroMapper.cadastroResponseDTO(cadastroCriado, null);
         return new ResponseEntity<>(cadastroResponse, HttpStatus.CREATED);
     }
 
@@ -75,7 +76,7 @@ public class CadastroController {
         }
         List<CadastroResponseDTO> listaCadastrosResponse = new ArrayList<>();
         for (Cadastro cadastro : listaCadastros) {
-            CadastroResponseDTO cadastroResponseDTO = cadastroMapper.cadastroResponseDTO(cadastro);
+            CadastroResponseDTO cadastroResponseDTO = cadastroMapper.cadastroResponseDTO(cadastro, null);
             listaCadastrosResponse.add(cadastroResponseDTO);
         }
         return new ResponseEntity<>(listaCadastrosResponse, HttpStatus.OK);
@@ -94,7 +95,11 @@ public class CadastroController {
         if (cadastroSalvo.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        CadastroResponseDTO cadastroResponseDTO = cadastroMapper.cadastroResponseDTO(cadastroSalvo.get());
+        Link link = linkTo(
+                        methodOn(CadastroController.class)
+                                .readCadastro(cadastroSalvo.get().getId())
+                ).withSelfRel();
+        CadastroResponseDTO cadastroResponseDTO = cadastroMapper.cadastroResponseDTO(cadastroSalvo.get(), link);
         return new ResponseEntity<>(cadastroResponseDTO, HttpStatus.OK);
     }
 
@@ -114,8 +119,7 @@ public class CadastroController {
         Cadastro cadastro = cadastroMapper.requestRecordToCadastro(cadastroRequestDTO);
         cadastro.setId(id);
         Cadastro cadastroAtualizo = cadastroRepository.save(cadastro);
-
-        CadastroResponseDTO cadastroResponseDTO = cadastroMapper.cadastroResponseDTO(cadastroAtualizo);
+        CadastroResponseDTO cadastroResponseDTO = cadastroMapper.cadastroResponseDTO(cadastroAtualizo, null);
         return new ResponseEntity<>(cadastroResponseDTO, HttpStatus.OK);
     }
 

@@ -25,7 +25,7 @@ public class CadastroMapper {
     }
 
     // cadastro para cadastroResponseDTO (Record)
-    public CadastroResponseDTO cadastroResponseDTO(Cadastro cadastro, Link link) {
+        public CadastroResponseDTO cadastroResponseDTO(Cadastro cadastro, Link link) {
         return new CadastroResponseDTO(
                 cadastro.getId(),
                 cadastro.getNome(),
