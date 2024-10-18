@@ -1,6 +1,6 @@
 package com.example.demo.dto;
 
-import io.swagger.v3.oas.annotations.links.Link;
+import org.springframework.hateoas.Link;
 
 import java.sql.Date;
 
@@ -13,6 +13,7 @@ public record CadastroResponseDTO(
         Date dataNascimento,
         String sexo,
         String tipoPlano,
-        String cep
+        String cep,
+        Link link
 ) {
 }

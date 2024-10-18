@@ -25,7 +25,7 @@ public class CadastroMapper {
     }
 
     // cadastro para cadastroResponseDTO (Record)
-    public CadastroResponseDTO cadastroResponseDTO(Cadastro cadastro) {
+    public CadastroResponseDTO cadastroResponseDTO(Cadastro cadastro, Link link) {
         return new CadastroResponseDTO(
                 cadastro.getId(),
                 cadastro.getNome(),
@@ -35,7 +35,8 @@ public class CadastroMapper {
                 cadastro.getDataNascimento(),
                 cadastro.getSexo(),
                 cadastro.getTipoPlano(),
-                cadastro.getCep()
+                cadastro.getCep(),
+                link
         );
     }
 }
