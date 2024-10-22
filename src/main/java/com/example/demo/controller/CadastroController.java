@@ -57,7 +57,10 @@ public class CadastroController {
 
         Cadastro cadastroConvertido = cadastroMapper.requestRecordToCadastro(cadastroRequest);
         Cadastro cadastroCriado = cadastroRepository.save(cadastroConvertido);
-        CadastroResponseDTO cadastroResponse = cadastroMapper.cadastroResponseDTO(cadastroCriado, null);
+
+        Link selfLink = linkTo(methodOn(CadastroController.class).readCadastro(cadastroCriado.getId())).withSelfRel();
+
+        CadastroResponseDTO cadastroResponse = cadastroMapper.cadastroResponseDTO(cadastroCriado, selfLink);
         return new ResponseEntity<>(cadastroResponse, HttpStatus.CREATED);
     }
 
@@ -69,18 +72,25 @@ public class CadastroController {
             @ApiResponse(responseCode = "200", description = "A busca pelos cadastros foi realizada com sucesso!")
     })
     @GetMapping
-    public ResponseEntity<List<CadastroResponseDTO>> readCadastros() {
+    public ResponseEntity<List<CadastroResponseDTO>> readCadastros(Pageable paginacao) {
         Page<Cadastro> listaCadastros = cadastroRepository.findAll(paginacao);
         if (listaCadastros.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
+
         List<CadastroResponseDTO> listaCadastrosResponse = new ArrayList<>();
         for (Cadastro cadastro : listaCadastros) {
-            CadastroResponseDTO cadastroResponseDTO = cadastroMapper.cadastroResponseDTO(cadastro, null);
+            Link selfLink = linkTo(methodOn(CadastroController.class).readCadastro(cadastro.getId())).withSelfRel();
+
+            CadastroResponseDTO cadastroResponseDTO = cadastroMapper.cadastroResponseDTO(cadastro, selfLink);
             listaCadastrosResponse.add(cadastroResponseDTO);
         }
-        return new ResponseEntity<>(listaCadastrosResponse, HttpStatus.OK);
+
+        Link allCadastrosLink = linkTo(methodOn(CadastroController.class).readCadastros(paginacao)).withSelfRel();
+
+        return ResponseEntity.ok().header("Link", allCadastrosLink.toString()).body(listaCadastrosResponse);
     }
+
 
 
     @Operation(summary = "Retorna um cadastro de acordo com seu ID.")
@@ -119,7 +129,10 @@ public class CadastroController {
         Cadastro cadastro = cadastroMapper.requestRecordToCadastro(cadastroRequestDTO);
         cadastro.setId(id);
         Cadastro cadastroAtualizo = cadastroRepository.save(cadastro);
-        CadastroResponseDTO cadastroResponseDTO = cadastroMapper.cadastroResponseDTO(cadastroAtualizo, null);
+        Link link = linkTo(
+                methodOn(CadastroController.class)
+                        .readCadastro(id)).withSelfRel();
+        CadastroResponseDTO cadastroResponseDTO = cadastroMapper.cadastroResponseDTO(cadastroAtualizo, link);
         return new ResponseEntity<>(cadastroResponseDTO, HttpStatus.OK);
     }
 
