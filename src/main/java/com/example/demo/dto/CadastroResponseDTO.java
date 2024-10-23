@@ -1,5 +1,7 @@
 package com.example.demo.dto;
 
+import com.example.demo.model.Sexo;
+import com.example.demo.model.TipoPlano;
 import org.springframework.hateoas.Link;
 
 import java.sql.Date;
@@ -11,8 +13,8 @@ public record CadastroResponseDTO(
         String email,
         String senha,
         Date dataNascimento,
-        String sexo,
-        String tipoPlano,
+        Sexo sexo,
+        TipoPlano tipoPlano,
         String cep,
         Link link
 ) {

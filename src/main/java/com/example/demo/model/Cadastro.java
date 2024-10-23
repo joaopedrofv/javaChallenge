@@ -23,9 +23,9 @@ public class Cadastro {
     @Column(name = "data_nascimento")
     private Date dataNascimento;
     @Column(name = "sexo")
-    private String sexo;
+    private Sexo sexo;
     @Column(name = "tipo_plano")
-    private String tipoPlano;
+    private TipoPlano tipoPlano;
     @Column(name = "cep")
     private String cep;
 }
