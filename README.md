@@ -91,3 +91,9 @@ O usuário apenas deve rodar a classe `JavaChallengeApplication`, visto que o ba
 
 ### 5. **Deletar Cadastro** - `DELETE /cadastros/{id}`
    - Descrição: Deleta um cadastro do sistema.
+
+## Diagrama de classe
+![Diagrama de classe](images/Classes.png)
+
+## DER
+![Diagrama DER](images/DER.png)
