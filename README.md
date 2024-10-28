@@ -10,7 +10,22 @@ Criação dos métodos PUT e DELETE e auxílio com a ideia principal do Challeng
 
 ## Período de Desenvolvimento
 
-Aplicação desenvolvida entre **02/09/2024** e **07/10/2024**.
+Aplicação desenvolvida entre **02/09/2024** e **08/11/2024**.
+
+## Sprints
+
+### 1º Sprint (02/09 a 07/10)
+- Criação dos diretórios da aplicação: **Model**, **Repository**, **Service**, **Controller**, **DTO** e **Exception**.
+- Desenvolvimento da classe **Cadastro** e das classes necessárias para o funcionamento da aplicação.
+- Implementação dos métodos `@Post`, `@Get`, `@GetByID`, `@Put` e `@Delete`.
+- Desenvolvimento do README no GitHub.
+
+### 2º Sprint (08/10 a 08/11)
+- Utilização de **Lombok** na classe Cadastro.
+- Inserção de `@Operation` e `@ApiResponse` nos métodos para CRUD.
+- Criação do link para **HATEOAS**.
+- Atualização da validação dos dados.
+- Criação de **Enums** para **Sexo** e **TipoPlano**.
 
 ## Link do Vídeo da Proposta Tecnológica
 
