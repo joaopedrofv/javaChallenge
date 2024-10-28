@@ -1,0 +1,100 @@
+@startuml
+package "model" {
+    class Cadastro {
+        - long id
+        - String nome
+        - String sobrenome
+        - String email
+        - String senha
+        - Date dataNascimento
+        - Sexo sexo
+        - TipoPlano tipoPlano
+        - String cep
+    }
+
+    enum Sexo {
+        + MASCULINO
+        + FEMININO
+        + OUTRO
+        --
+        - String descricao
+        + getDescricao(): String
+    }
+
+    enum TipoPlano {
+        + INTEGRAL_MEI
+        + INTEGRAL_PME
+        + MASTER_PME
+        --
+        - String descricao
+        + getDescricao(): String
+    }
+}
+
+package "repository" {
+    interface CadastroRepository {
+        {abstract} + findAll(): List<Cadastro>
+        {abstract} + findById(id: Long): Optional<Cadastro>
+        {abstract} + save(cadastro: Cadastro): Cadastro
+        {abstract} + deleteById(id: Long): void
+        {abstract} + existsById(id: Long): boolean
+    }
+}
+
+package "service" {
+    class CadastroMapper {
+        + requestRecordToCadastro(cadastroRequestDTO: CadastroRequestDTO): Cadastro
+        + cadastroResponseDTO(cadastro: Cadastro, link: Link): CadastroResponseDTO
+    }
+}
+
+package "exception" {
+    class ValidationExceptionHandler {
+        + handleValidationExceptions(ex: MethodArgumentNotValidException): ResponseEntity<Map<String, String>>
+    }
+}
+
+package "dto" {
+    class CadastroResponseDTO {
+        - Long id
+        - String nome
+        - String sobrenome
+        - String email
+        - String senha
+        - Date dataNascimento
+        - Sexo sexo
+        - TipoPlano tipoPlano
+        - String cep
+        - Link link
+    }
+
+    class CadastroRequestDTO {
+        - Long id
+        - String nome
+        - String sobrenome
+        - String email
+        - String senha
+        - Date dataNascimento
+        - Sexo sexo
+        - TipoPlano tipoPlano
+        - String cep
+    }
+}
+
+package "controller" {
+    class CadastroController {
+        + createCadastro(cadastroRequest: CadastroRequestDTO): ResponseEntity<CadastroResponseDTO>
+        + readCadastros(paginacao: Pageable): ResponseEntity<List<CadastroResponseDTO>>
+        + readCadastro(id: Long): ResponseEntity<CadastroResponseDTO>
+        + update(id: Long, cadastroRequestDTO: CadastroRequestDTO): ResponseEntity<CadastroResponseDTO>
+        + delete(id: Long): ResponseEntity<Void>
+    }
+}
+
+CadastroRepository ..|> JpaRepository
+CadastroRepository --> Cadastro : manages
+Cadastro *-- Sexo : contains
+Cadastro *-- TipoPlano : contains
+CadastroController --> CadastroRepository : uses
+CadastroController --> CadastroMapper : uses
+@enduml
