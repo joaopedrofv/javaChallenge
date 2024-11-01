@@ -58,9 +58,9 @@ public class CadastroController {
         Cadastro cadastroConvertido = cadastroMapper.requestRecordToCadastro(cadastroRequest);
         Cadastro cadastroCriado = cadastroRepository.save(cadastroConvertido);
 
-        Link selfLink = linkTo(methodOn(CadastroController.class).readCadastro(cadastroCriado.getId())).withSelfRel();
+       // Link selfLink = linkTo(methodOn(CadastroController.class).readCadastro(cadastroCriado.getId())).withSelfRel();
 
-        CadastroResponseDTO cadastroResponse = cadastroMapper.cadastroResponseDTO(cadastroCriado, selfLink);
+        CadastroResponseDTO cadastroResponse = cadastroMapper.cadastroResponseDTO(cadastroCriado, null);
         return new ResponseEntity<>(cadastroResponse, HttpStatus.CREATED);
     }
 
@@ -68,12 +68,12 @@ public class CadastroController {
     @Operation(summary = "Retorna todos os cadastros registrados no banco de dados.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Não foram encontrados registros de cadastro no banco de dados.",
-                content = @Content(schema = @Schema())),
+                    content = @Content(schema = @Schema())),
             @ApiResponse(responseCode = "200", description = "A busca pelos cadastros foi realizada com sucesso!")
     })
     @GetMapping
-    public ResponseEntity<List<CadastroResponseDTO>> readCadastros(Pageable paginacao) {
-        Page<Cadastro> listaCadastros = cadastroRepository.findAll(paginacao);
+    public ResponseEntity<List<CadastroResponseDTO>> readCadastros() {
+        List<Cadastro> listaCadastros = cadastroRepository.findAll(); // Obtendo todos os cadastros
         if (listaCadastros.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -81,15 +81,14 @@ public class CadastroController {
         List<CadastroResponseDTO> listaCadastrosResponse = new ArrayList<>();
         for (Cadastro cadastro : listaCadastros) {
             Link selfLink = linkTo(methodOn(CadastroController.class).readCadastro(cadastro.getId())).withSelfRel();
-
             CadastroResponseDTO cadastroResponseDTO = cadastroMapper.cadastroResponseDTO(cadastro, selfLink);
             listaCadastrosResponse.add(cadastroResponseDTO);
         }
 
-        Link allCadastrosLink = linkTo(methodOn(CadastroController.class).readCadastros(paginacao)).withSelfRel();
-
-        return ResponseEntity.ok().header("Link", allCadastrosLink.toString()).body(listaCadastrosResponse);
+        return ResponseEntity.ok(listaCadastrosResponse);
     }
+
+
 
 
 

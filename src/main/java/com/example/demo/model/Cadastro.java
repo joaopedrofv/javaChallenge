@@ -23,8 +23,10 @@ public class Cadastro {
     @Column(name = "data_nascimento")
     private Date dataNascimento;
     @Column(name = "sexo")
+    @Enumerated(EnumType.STRING)
     private Sexo sexo;
     @Column(name = "tipo_plano")
+    @Enumerated(EnumType.STRING)
     private TipoPlano tipoPlano;
     @Column(name = "cep")
     private String cep;

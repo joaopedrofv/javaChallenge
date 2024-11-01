@@ -22,9 +22,9 @@ public record CadastroRequestDTO(
         @NotNull(message = "A data de nascimento é obrigatória")
         @Past(message = "A data de nascimento deve ser no passado")
         Date dataNascimento,
-        @NotBlank(message = "O sexo da pessoa é obrigatório")
+        @NotNull(message = "O sexo da pessoa é obrigatório")
         Sexo sexo,
-        @NotBlank(message = "O tipo de plano da pessoa é obrigatório")
+        @NotNull(message = "O tipo de plano da pessoa é obrigatório")
         TipoPlano tipoPlano,
         @NotBlank(message = "O CEP é obrigatório")
         @Pattern(regexp = "\\d{5}-\\d{3}", message = "O CEP deve estar no formato 00000-000.")
