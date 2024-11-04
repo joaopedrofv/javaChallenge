@@ -15,17 +15,19 @@ Aplicação desenvolvida entre **02/09/2024** e **08/11/2024**.
 ## Sprints
 
 ### 1º Sprint (02/09 a 07/10)
-- Criação dos diretórios da aplicação: **Model**, **Repository**, **Service**, **Controller**, **DTO** e **Exception**.
-- Desenvolvimento da classe **Cadastro** e das classes necessárias para o funcionamento da aplicação.
-- Implementação dos métodos `@Post`, `@Get`, `@GetByID`, `@Put` e `@Delete`.
-- Desenvolvimento do README no GitHub.
+- **27/09**: Criação do projeto **SpringBoot**, diretórios, classes e repositórios.
+- **27/09**: Adição dos métodos **Post**, **Get** e **GetById**.
+- **28/09**: Criação do **README**.
+- **07/10**: Inserção dos endpoints e instruções de como rodar a aplicação.
 
 ### 2º Sprint (08/10 a 08/11)
-- Utilização de **Lombok** na classe Cadastro.
-- Inserção de `@Operation` e `@ApiResponse` nos métodos para CRUD.
-- Criação do link para **HATEOAS**.
-- Atualização da validação dos dados.
-- Criação de **Enums** para **Sexo** e **TipoPlano**.
+- **17/10**: Implementação do **Lombok** na classe **Cadastro**.
+- **18/10**: **@Operation** e **@ApiResponse** para auxílio nas requisições.
+- **18/10**: Criação do link para **HATEOAS**.
+- **22/10**: Atualização das validações.
+- **23/10**: Criação dos **Enums** para **Sexo** e **TipoPlano**.
+- **28/10**: Adição dos diagramas e renomeação.
+
 
 ## Link do Vídeo da Proposta Tecnológica
 
