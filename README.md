@@ -2,11 +2,14 @@
 
 ## Autores
 
-**João Pedro Fontana Villagra | RM553343**  
+**João Pedro Fontana Villagra | RM 553343**  
 Idealização do projeto Java, criação de grande parte do código fonte.
 
 **Vinicius Malavia Lorenzetti | RM 553121**  
 Criação dos métodos PUT e DELETE e auxílio com a ideia principal do Challenge.
+
+**Marcelo Mendes Galli | RM 553654**
+Auxílio da criação de diagramas e docker file.
 
 ## Período de Desenvolvimento
 
